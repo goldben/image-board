@@ -1,0 +1,54 @@
+* {
+	box-sizing: border-box;
+}
+
+body {}
+
+header {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	background: grey;
+	padding: 0 30px 30px;
+}
+
+form {
+	display: flex;
+	justify-content: space-background;
+}
+
+.wrapper {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-around;
+	flex-flow: row wrap;
+	flex-direction: row-reverse;
+}
+
+.card {
+	margin: 10px;
+	width: 300px;
+	height: 300px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	flex-direction: column;
+	overflow: hidden;
+	position: relative;
+}
+
+.card-img {
+	position: relative;
+	width: 280px;
+	height: 280px;
+	border-radius: 20px;
+}
+
+.title {
+
+}
+
+p {
+	text-align: center;
+	margin: 10px;
+}
