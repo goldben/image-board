@@ -12,9 +12,16 @@ header {
 	padding: 0 30px 30px;
 }
 
+.black-container {
+	z-index: 100;
+	width: 600px;
+	height: 600px;
+	background: black;
+}
+
 form {
 	display: flex;
-	justify-content: space-background;
+	justify-content: space-around;
 }
 
 .wrapper {

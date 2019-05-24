@@ -4,6 +4,17 @@ var db = spicedPg(dburl);
 
 
 ////////////7////////store functions/////////////////////////////////
+module.exports.insertImgInDb = function insertImgInDb(
+    url,
+    username,
+    title,
+    description
+) {
+    return db.query(
+        `INSERT INTO images (url, username, title, description) VALUES ($1, $2, $3, $4) returning *;`,
+        [url, username, title, description]
+    );
+};
 
 ////////////////////////////get functions////////////////////////////
 

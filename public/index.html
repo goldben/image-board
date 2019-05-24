@@ -26,9 +26,19 @@
 			</div>
 		</div>
 
+		<!-- here's the HTML my Vue modal should have -->
+		    <script id="large-view-template" type='text/x-template'>
+		        <div class="black-container">
+		            <h1>image name: {{ animalName }}</h1>
+		            <p>{{description}}</p>
+		            <p>uploaded by{{username}}</p>
+					<h2>add a comment!</h2>
+		        </div>
+		    </script>
 
 
-	</div>
+
+	</div> <!--main closes--->
 
 	<script src="/js/vue.js"></script>
 	<script src="/js/axios.min.js"></script>
