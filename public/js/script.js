@@ -5,6 +5,7 @@ var vm;
 				//most vue code goes here
 				el: '#main',
 				data: {
+					showPopup: false,
 					images: [],
 					form: {
 						title:'',
@@ -52,13 +53,17 @@ var vm;
 						})
 					},
 					onClickGalleryImage: function(imageData) {
-						console.log("imagefound",imageData)
+						this.showPopup = true;
 						this.popupData = {
 							title: imageData.title,
 							imageUrl: imageData.url,
 							description: imageData.description,
 							comments: imageData.comments
 						}
+					},
+					onClosePopup: function(){
+						console.log("close!")
+						this.showPopup = false;
 					}
 				}
 
@@ -69,7 +74,9 @@ var vm;
 				'imageUrl',
 				'title',
 				'description',
-				'comments'
+				'comments',
+				'onClosePopup',
+				'showPopup'
 			],
 			data: function () {
 				return {
@@ -77,8 +84,9 @@ var vm;
 				};
 			},
 			template: `
-			<div
+			<div v-if='showPopup' class="popup"
 						>
+						<button v-on:click='onClosePopup'>X</button>
 						<img
 							:src='imageUrl'
 							/>

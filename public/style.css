@@ -12,6 +12,18 @@ header {
 	padding: 0 30px 30px;
 }
 
+.popup {
+	position: absolute;
+	top: 20%;
+	left: 20%;
+	background-color: black;
+}
+
+.popup img {
+	width: 300px;
+	height: 300px;
+}
+
 .black-container {
 	z-index: 100;
 	width: 600px;
