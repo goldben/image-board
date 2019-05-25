@@ -1,7 +1,6 @@
 //all the vue code goes in this file
-var vm;
 (function() {
-		vm = new Vue({
+		new Vue({
 				//most vue code goes here
 				el: '#main',
 				data: {
@@ -11,12 +10,6 @@ var vm;
 						description:'',
 						username:'',
 						file:'null'
-					},
-					popupData: {
-						title: '',
-						imageUrl: '',
-						description: '',
-						comments: ''
 					}
 				}, // closes data
 				// mounted method has a life cicle
@@ -50,45 +43,8 @@ var vm;
 						.then(function(resp) {
 							console.log('resp in POST /upload', resp);
 						})
-					},
-					onClickGalleryImage: function(imageData) {
-						console.log("imagefound",imageData)
-						this.popupData = {
-							title: imageData.title,
-							imageUrl: imageData.url,
-							description: imageData.description,
-							comments: imageData.comments
-						}
 					}
 				}
 
 			}); //closes Vue instance
-// pop image component for showing the clicked image in a popup
-		Vue.component('popup', {
-			props: [
-				'imageUrl',
-				'title',
-				'description',
-				'comments'
-			],
-			data: function () {
-				return {
-					newComments: []
-				};
-			},
-			template: `
-			<div
-						>
-						<img
-							:src='imageUrl'
-							/>
-						<h1>
-							{{title}}
-
-						</h1>
-						<p>{{description}}</p>
-						<div>{{comments}}</div>
-						</div>
-			`
-		})
 })();

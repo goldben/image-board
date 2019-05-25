@@ -20,19 +20,14 @@
 		</header>
 
 		<div class="wrapper">
-			<div class="card" v-for='image in images' v-if='images.length>0' @click='onClickGalleryImage(image)'>
+			<div class="card" v-for='image in images' v-if='images.length>0'>
 				<img class="card-img" :src=image.url />
 			<span class="title"><p>{{image.title}}</p></span>
 			</div>
 		</div>
 
 
-			<popup
-				:image-url="popupData.imageUrl"
-				:title="popupData.title"
-				:description="popupData.description"
-				:comments="popupData.comments"
-			/>
+
 	</div>
 
 	<script src="/js/vue.js"></script>
