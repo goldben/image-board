@@ -55,6 +55,7 @@ var vm;
 					onClickGalleryImage: function(imageData) {
 						this.showPopup = true;
 						this.popupData = {
+							imageId: imageData.id,
 							title: imageData.title,
 							imageUrl: imageData.url,
 							description: imageData.description,
@@ -71,6 +72,7 @@ var vm;
 // pop image component for showing the clicked image in a popup
 		Vue.component('popup', {
 			props: [
+				'imageId',
 				'imageUrl',
 				'title',
 				'description',
@@ -95,7 +97,13 @@ var vm;
 
 						</h1>
 						<p>{{description}}</p>
-						<div>{{comments}}</div>
+						
+						<h3>comments for image id {{imageId}}</h3>
+
+						<div class='comments-conatainer' v-for='comment in comments' v-if='comments.length>0'>
+						<p>
+						</p>
+						</div>
 						</div>
 			`
 		})

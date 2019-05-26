@@ -16,7 +16,7 @@ header {
 	position: absolute;
 	top: 20%;
 	left: 20%;
-	background-color: black;
+	background-color: white;
 }
 
 .popup img {
@@ -24,12 +24,7 @@ header {
 	height: 300px;
 }
 
-.black-container {
-	z-index: 100;
-	width: 600px;
-	height: 600px;
-	background: black;
-}
+
 
 form {
 	display: flex;
