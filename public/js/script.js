@@ -76,23 +76,32 @@ var vm;
 			'imageUrl',
 			'title',
 			'description',
-			'comments',
 			'onClosePopup',
 			'showPopup'
 		],
 		data: function() {
-            return {
-                comments: [],
-                form: {
-                    username: "",
-                    comment: "",
-                    imageId: ""
-                }
-            };
-}, // closes data
+			return {
+				comments: [],
+				form: {
+					username: "",
+					comment: "",
+					imageId: ""
+				}
+			};
+		}, // closes data
+		mounted: function() {
+			var self = this;
+			// here we'll make axios requests to get data from the server that we need to the render on screen
+			axios.get('/comments/' + self.imageId).then(function(resp) {
+				//			console.log('GET/cities', resp.data);
+				//			console.log('self: ' , self);
+				self.comments = resp.data;
+				console.log('self.images:', self.comments);
+			});
+		}, //close mounted
 		methods: {
 			submitComment: function(imageId) {
-				var self =this;
+				var self = this;
 				// console.log('upload file');
 				var formData = new FormData();
 				formData.append('username', this.form.username);
@@ -102,6 +111,7 @@ var vm;
 				axios.post('/addcomment', formData)
 					.then(function(resp) {
 						console.log('resp in POST /addcomment', resp);
+						 self.comments.push(resp.data);
 					})
 			}
 		}

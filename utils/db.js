@@ -16,7 +16,7 @@ module.exports.insertImgInDb = function (
     );
 };
 
-module.exports.insertInComments = function (
+module.exports.insertCommentIndb = function (
     comment,
     username,
     postId
@@ -34,5 +34,5 @@ module.exports.getImages = function() {
 };
 
 module.exports.getComments = function(postId) {
-	return db.query(`SELECT * FROM comments WHERE postId = $1`, [userId]);
+	return db.query(`SELECT * FROM comments WHERE postId = $1`, [postId]);
 };

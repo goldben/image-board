@@ -29,7 +29,6 @@
 
 			<popup
 				:image-id = "popupData.imageId"
-				:comments = "popupData.comments"
 				:image-url="popupData.imageUrl"
 				:title="popupData.title"
 				:description="popupData.description"
@@ -61,7 +60,7 @@
 
 							<div class='comments-conatainer' v-for='comment in comments' v-if='comments.length>0'>
 							<p>
-							{{content}}
+							{{comment}}
 							</p>
 							</div>
 							</div>
