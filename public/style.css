@@ -24,7 +24,12 @@ header {
 	height: 300px;
 }
 
+.x {
+	position: absolute;
+	top: 0;
+	right: 0;
 
+}
 
 form {
 	display: flex;

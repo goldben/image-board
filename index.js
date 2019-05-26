@@ -31,6 +31,16 @@ var uploader = multer({
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
+app.post('/addcomment', function(req, res) {
+	console.log('add comment: ', req.body);
+	const user = req.body.username;
+	const comment = req.body.comment;
+	const imageId =req.body.imageId;
+
+	if (req.body.comment) {
+		db.insertInComments(comment, user, imageId)
+	}
+});
 
 app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
 	console.log(req.body);

@@ -29,6 +29,7 @@
 
 			<popup
 				:image-id = "popupData.imageId"
+				:comments = "popupData.comments"
 				:image-url="popupData.imageUrl"
 				:title="popupData.title"
 				:description="popupData.description"
@@ -37,6 +38,36 @@
 				:on-close-popup="onClosePopup"
 			/>
 	</div>
+			<script id='popup-template' type="text/x-template">
+
+				<div v-if='showPopup' class="popup"
+							>
+							<button class='x' v-on:click='onClosePopup'>X</button>
+							<img
+								:src='imageUrl'
+								/>
+							<h1>
+								{{title}}
+
+							</h1>
+							<p>{{description}}</p>
+							<h3>add a comment</h3>
+							<form>
+				                <input v-model='form.comment' type="text" name="comment" placeholder="enter your comment" required>
+				                <input v-model='form.username' type="text" name="username" placeholder="user name" required>
+				                <button @click.prevent.default='submitComment(imageId)'>Submit</button>
+							</form>
+							<h3>comments for image id {{imageId}}</h3>
+
+							<div class='comments-conatainer' v-for='comment in comments' v-if='comments.length>0'>
+							<p>
+							{{content}}
+							</p>
+							</div>
+							</div>
+
+			</script>
+
 
 	<script src="/js/vue.js"></script>
 	<script src="/js/axios.min.js"></script>
