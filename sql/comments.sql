@@ -3,7 +3,12 @@ DROP TABLE IF EXISTS comments;
 CREATE TABLE comments(
     id SERIAL PRIMARY KEY,
     comment VARCHAR(255) NOT NULL,
-    username VARCHAR(255) NOT NULL,
-    postId INTEGER NOT NULL,
+    username VARCHAR(300) NOT NULL,
+    postId INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+ALTER TABLE comments
+	ADD FOREIGN KEY (postId)
+	REFERENCES images(Id)
+	ON DELETE CASCADE;

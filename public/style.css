@@ -13,10 +13,14 @@ header {
 }
 
 .popup {
-	position: absolute;
+	position: fixed;
 	top: 20%;
 	left: 20%;
 	background-color: white;
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+	align-items: center;
 }
 
 .popup img {

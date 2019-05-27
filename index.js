@@ -34,7 +34,7 @@ app.use(bodyParser.json());
 
 app.use(express.static(`./public`));
 
-///////////////////////////////////////////post////////////////////////////////////
+////////////////////////////////////////// POST ////////////////////////////////////
 
 
 app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
@@ -55,7 +55,7 @@ app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
 				res.json(results.rows[0]);
 			})
 			.catch(e => {
-				console.log(e);
+				console.log('ERROR AT UPLOAD FILE', e);
 			});
 	} else {
 		res.json({
@@ -65,35 +65,32 @@ app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
 });
 
 app.post(`/addcomment`, (req, res) => {
-	console.log("REQ: ", req.body);
+	console.log("COMMENT REQUEST: ", req.body);
 	//req.body.username req.body.comment req.body.imageId
-	let {
-		username,
-		comment,
-		imageId
-	} = req.body;
+	let username = req.body.username;
+	let comment = req.body.comment;
+	let imageId = req.body.imageId
 
-	db.insertCommentIndb(username, comment, imageId).then(result => {
-		let {
-			imageId,
-			created_at
-		} = result.rows[0];
-		// console.log("result", result);
+	console.log('new comment:', comment);
+	db.insertCommentIndb(comment, username, imageId).then(results => {
+		console.log("results", results);
+
+		let id = result.rows[0].id;
+		let created_at = result.rows[0].created_at;
+
 		res.json({
-				id: id,
-				username: username,
-				comment: comment,
-				imageId: imageId,
-				created_at: created_at
-			})
-			.catch(e => {
-				console.log(e);
-			});
-
+			id: id,
+			username: username,
+			comment: comment,
+			imageId: imageId,
+			created_at: created_at
+		});
+	}).catch(e => {
+		console.log('ERROR AT ADD COMMENT', e);
 	});
 });
 
-//////////////////////////////////////GET/////////////////////////////////////////////
+////////////////////////////////////// GET /////////////////////////////////////////////
 
 
 app.get('/images', (req, res) => {
@@ -101,19 +98,42 @@ app.get('/images', (req, res) => {
 		res.json(results.rows);
 		//console.log('GET /images hit!!!', results.rows[0].url);
 		//once front recieves JSON
+	}).catch(e => {
+		console.log('ERROR AT GET IMAGES', e);
+
 	});
 
 });
 
 
-app.get(`/comments/:id`, (req, res) => {
-	db.getComments(req.params.id).then(results => {
-		res.json({
-			comments: results.rows
+app.get(`/popup-data/:id`, (req, res) => {
+	let id = req.params.id
+	let imgInfo;
+	//console.log('req comments for post id', id);
+
+	db.getImgInfo(id).then(results => {
+		imgInfo = results.rows[0];
+		 //console.log('img info:', imgInfo);
+
+	}).then(() => {
+		db.getComments(id).then(results => {
+			//console.log('getcomments', results);
+			let comments = results.rows;
+			//console.log('imginfo:', imgInfo);
+			console.log('comment:', comments);
+			console.log('info', imgInfo);
+
+			res.json({
+				imageInfo: imgInfo,
+				comments: comments
+			});
+		}).catch(e => {
+			console.log('ERROR AT GET POP UP DATA', e);
 		});
+	}).catch(e => {
+		console.log('ERROR AT GET POP UP DATA', e);
 	});
 });
-
 
 //////////////////////////////////////////////////////////////////////////////
 

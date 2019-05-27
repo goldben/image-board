@@ -20,7 +20,7 @@
 		</header>
 
 		<div class="wrapper">
-			<div class="card" v-for='image in images' v-if='images.length>0' @click='onClickGalleryImage(image)'>
+			<div class="card" v-for='image in images' v-if='images.length>0' @click='updataClicked(image.id)'>
 				<img class="card-img" :src=image.url />
 			<span class="title"><p>{{image.title}}</p></span>
 			</div>
@@ -28,39 +28,36 @@
 
 
 			<popup
-				:image-id = "popupData.imageId"
-				:image-url="popupData.imageUrl"
-				:title="popupData.title"
-				:description="popupData.description"
-				:comments="popupData.comments"
-				:show-popup="showPopup"
-				:on-close-popup="onClosePopup"
+				:clicked-img="clickedImg"
+				v-if='clickedImg'
+				@close-it = "onclosepopup"
 			/>
 	</div>
 			<script id='popup-template' type="text/x-template">
 
-				<div v-if='showPopup' class="popup"
+				<div v-if='clickedImg' class="popup"
 							>
-							<button class='x' v-on:click='onClosePopup'>X</button>
+							<button class='x' @click='closepopup'>X</button>
 							<img
-								:src='imageUrl'
+								:src='imageInfo.url'
 								/>
 							<h1>
-								{{title}}
+								{{imageInfo.title}}
 
 							</h1>
-							<p>{{description}}</p>
+							<p>{{imageInfo.description}}</p>
 							<h3>add a comment</h3>
 							<form>
 				                <input v-model='form.comment' type="text" name="comment" placeholder="enter your comment" required>
 				                <input v-model='form.username' type="text" name="username" placeholder="user name" required>
-				                <button @click.prevent.default='submitComment(imageId)'>Submit</button>
+				                <button @click.prevent.default='submitComment'>Submit</button>
 							</form>
-							<h3>comments for image id {{imageId}}</h3>
+							<h3>comments for image id {{clickedImg}}</h3>
 
 							<div class='comments-conatainer' v-for='comment in comments' v-if='comments.length>0'>
 							<p>
-							{{comment}}
+							{{comment.comment}}, comment by: {{comment.username}}, {{comment.created_at}}
+
 							</p>
 							</div>
 							</div>
