@@ -2,7 +2,8 @@
 	box-sizing: border-box;
 }
 
-body {}
+body {
+}
 
 header {
 	display: flex;

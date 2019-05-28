@@ -5,6 +5,7 @@
 		data: {
 			clickedImg: location.hash.slice(1),
 			images: [],
+			getMoreButton: false,
 			form: {
 				title: "",
 				description: "",
@@ -18,18 +19,40 @@
 			// here we'll make axios requests to get data from the server that we need to the render on screen
 			axios.get('/images').then(function(resp) {
 				self.images = resp.data;
+				if (
+                    self.images[self.images.length - 1].id !=
+                    self.images[self.images.length - 1].lowest_id
+                ) {
+                    self.getMoreButton = true;
+                }
 			}).catch(function(e) {
 				console.log('GET IMAGES:', e);
 			});
 			addEventListener('hashchange', function() {
-				self.clickedImg = location.hash.slice(1)
-				console.log("clicked img is now", self.clickedImg)
+				self.clickedImg = location.hash.slice(1);
+				console.log("clicked img is now", self.clickedImg);
 
 			})
 
 		}, //close mounted
 
 		methods: {
+			getMoreImages: function() {
+				console.log("trying to load more");
+                var self = this;
+                let lastId = this.images[this.images.length - 1].id;
+				console.log("last id is ", lastId);
+                axios.get("/get-more-images/" + lastId).then(function(resp) {
+                    self.images = self.images.concat(resp.data);
+					console.log("axios responsd: ", resp);
+                    if (
+                        self.images[self.images.length - 1].id ===
+                        self.images[self.images.length - 1].lowest_id
+                    ) {
+                        self.getMoreButton = false;
+                    }
+                });
+            },
 			handleFileChange: function(e) {
 
 				this.form.file = e.target.files[0];
@@ -118,10 +141,17 @@
 				axios
 					.get("/popup-data/" + this.clickedImg)
 					.then(function(resp) {
-						console.log('resp', resp);
+						console.log('axios response', resp);
 						self.imageInfo = resp.data.imageInfo;
 						self.comments = resp.data.comments;
 						console.log("imageInfo", self.imageInfo);
+						if(self.imageInfo == undefined) {
+							console.log("sorry, image does not exist!");
+							self.closepopup()
+							location.hash = '';
+						}
+					}).catch(function(e) {
+						console.log('watch axios error', e);
 					});
 			}
 

@@ -105,6 +105,19 @@ app.get('/images', (req, res) => {
 
 });
 
+app.get('/get-more-images/:id', (req, res) => {
+	let lastId = req.params.id
+	db.getMoreImages(lastId).then(results => {
+		res.json(results.rows);
+		//console.log('GET /images hit!!!', results.rows[0].url);
+		//once front recieves JSON
+	}).catch(e => {
+		console.log('ERROR AT GET IMAGES', e);
+
+	});
+
+});
+
 
 app.get(`/popup-data/:id`, (req, res) => {
 	let id = req.params.id
@@ -127,10 +140,14 @@ app.get(`/popup-data/:id`, (req, res) => {
 				comments: comments
 			});
 		}).catch(e => {
-			console.log('ERROR AT GET POP UP DATA', e);
+			console.log('ERROR AT GET POP UP DATA1', e);
 		});
 	}).catch(e => {
-		console.log('ERROR AT GET POP UP DATA', e);
+		console.log('ERROR AT GET POP UP DATA2', e);
+		res.json({
+			imageInfo: undefined,
+			comments: undefined
+		});
 	});
 });
 

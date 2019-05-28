@@ -30,7 +30,7 @@
 					<p>{{image.title}}</p>
 				</span>
 			</div>
-			<button type="button" name="button">load more</button>
+			<button v-if="getMoreButton" @click="getMoreImages" id="more-button" type="button" name="button">LOAD MORE</button>
 		</div>
 
 

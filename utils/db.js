@@ -29,14 +29,38 @@ module.exports.insertCommentIndb = function (
 
 ////////////////////////////get functions////////////////////////////
 
-module.exports.getImages = function() {
-	return db.query(
-		`
-		SELECT * FROM images
-		ORDER BY id DESC
-		LIMIT 12
-		`
-	);
+module.exports.getImages = function getImages() {
+    return db.query(
+        `SELECT *, (
+       SELECT id FROM images
+       ORDER BY id ASC
+       LIMIT 1)
+       AS lowest_id FROM images ORDER BY id DESC LIMIT 3;`
+    );
+};
+
+exports.getMoreImages = function getMoreImages(id) {
+    return db.query(
+        `SELECT *, (
+       SELECT id FROM images
+       ORDER BY id ASC
+       LIMIT 1)
+       AS lowest_id FROM images
+       WHERE id < $1
+       ORDER BY id DESC
+       LIMIT 3;`,
+        [id]
+    );
+};
+
+exports.lowestId = function lowestId(id) {
+    return db.query(
+        `SELECT id FROM images
+        BY id ASC
+        limit 1;
+        `,
+        [id]
+    );
 };
 
 module.exports.getComments = function(postId) {
