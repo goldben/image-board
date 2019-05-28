@@ -120,8 +120,7 @@ app.get(`/popup-data/:id`, (req, res) => {
 			//console.log('getcomments', results);
 			let comments = results.rows;
 			//console.log('imginfo:', imgInfo);
-			console.log('comment:', comments);
-			console.log('info', imgInfo);
+			//console.log('comment:', comments);
 
 			res.json({
 				imageInfo: imgInfo,

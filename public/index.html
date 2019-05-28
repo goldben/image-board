@@ -3,11 +3,13 @@
 
 <head>
 	<title>IMAGE BOARD</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="/style.css">
 </head>
 
 <body>
-	<div id="main"><!--VUE------------------------------------------>
+	<div id="main">
+		<!--VUE------------------------------------------>
 		<header>
 			<h1>IMAGE BOARD</h1>
 			<form>
@@ -20,22 +22,23 @@
 		</header>
 
 		<div class="wrapper">
-			<div class="card" v-for='image in images' v-if='images.length>0' @click='updataClicked(image.id)'>
-				<img class="card-img" :src=image.url />
-			<span class="title"><p>{{image.title}}</p></span>
+			<div class="card" v-for='image in images' v-if='images.length>0'>
+				<a :href="'#' + image.id">
+					<img class="card-img" :src=image.url />
+				</a>
+				<span class="title">
+					<p>{{image.title}}</p>
+				</span>
 			</div>
+			<button type="button" name="button">load more</button>
 		</div>
 
 
-			<popup
-				:clicked-img="clickedImg"
-				v-if='clickedImg'
-				@close-it = "onclosepopup"
-			/>
+		<popup :clicked-img="clickedImg" v-if='clickedImg' @close-it="onclosepopup" >
 	</div>
-			<script id='popup-template' type="text/x-template">
+	<script id='popup-template' type="text/x-template">
 
-				<div v-if='clickedImg' class="popup"
+		<div v-if='clickedImg' class="popup"
 							>
 							<button class='x' @click='closepopup'>X</button>
 							<img

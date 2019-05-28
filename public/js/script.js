@@ -1,17 +1,17 @@
 //all the vue code goes in this file
 (function() {
 	var vm = new Vue({
-        el: "#main",
-        data: {
-            clickedImg: '',
-            images: [],
-            form: {
-                title: "",
-                description: "",
-                username: "",
-                file: null
-            }
-}, // closes data
+		el: "#main",
+		data: {
+			clickedImg: location.hash.slice(1),
+			images: [],
+			form: {
+				title: "",
+				description: "",
+				username: "",
+				file: null
+			}
+		}, // closes data
 		// mounted method has a life cicle
 		mounted: function() {
 			var self = this;
@@ -21,6 +21,11 @@
 			}).catch(function(e) {
 				console.log('GET IMAGES:', e);
 			});
+			addEventListener('hashchange', function() {
+				self.clickedImg = location.hash.slice(1)
+				console.log("clicked img is now", self.clickedImg)
+
+			})
 
 		}, //close mounted
 
@@ -40,17 +45,12 @@
 				axios.post('/upload', formData)
 					.then(function(resp) {
 						console.log('resp in POST /upload', resp);
-				})
+					})
 			},
-			updataClicked: function(id) {
-				this.clickedImg = id;
-
-				console.log('clicked img id: ', id);
-			},
-
 			onclosepopup: function() {
 				console.log("close!")
 				this.clickedImg = null;
+				location.hash = ""
 
 			}
 		}
@@ -61,7 +61,6 @@
 		props: [
 			'clickedImg',
 			'onClosePopup',
-			'showPopup'
 		],
 		data: function() {
 			return {
@@ -84,7 +83,7 @@
 					console.log('resp', resp);
 					self.imageInfo = resp.data.imageInfo;
 					self.comments = resp.data.comments;
-					 console.log("imageInfo", self.imageInfo);
+					console.log("imageInfo", self.imageInfo);
 				});
 		}, //close mounted
 		methods: {
@@ -102,18 +101,31 @@
 				axios.post('/addcomment', this.form)
 					.then(function(resp) {
 						console.log('resp in POST /addcomment', resp);
-						 self.comments.push(resp.data);
-				})
+						self.comments.push(resp.data);
+					})
 
 			},
 			closepopup: function() {
 				console.log('close it');
-	            this.$emit("close-it");
-	}
-		}
+				this.$emit("close-it");
+			}
+		},
+		watch: {
+			clickedImg: function() {
+				var self = this;
+				console.log('popup mounted');
 
+				axios
+					.get("/popup-data/" + this.clickedImg)
+					.then(function(resp) {
+						console.log('resp', resp);
+						self.imageInfo = resp.data.imageInfo;
+						self.comments = resp.data.comments;
+						console.log("imageInfo", self.imageInfo);
+					});
+			}
 
-		,
+		}, //close watch
 		template: '#popup-template'
 	})
 })();
