@@ -16,7 +16,7 @@ header {
 #choose-file {
 	height: 100px;
 }
-form {
+header form {
 	display: flex;
 	justify-content: space-around;
 }
@@ -50,9 +50,9 @@ input, select, textarea{
 /*-----------------------figure--------------------------- */
 
 figure {
-	width: 25%;
+	width: 30%;
 	border-radius: 20px;
-	margin: 0 4px 15px;
+	margin: 0 10px 20px;
   display: inline-block;
   text-align: center;
   overflow: hidden;
@@ -60,26 +60,24 @@ background-color: #000;
 }
 
 figure img {
-	width: 100%;
-	height: auto;
 	opacity: 0.7;
-	-webkit-transform: scale(1.15);
-    -ms-transform: scale(1.15);
-    transform: scale(1.15);
+	-webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.4);
     -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
     transition: transform 0.5s, opacity 0.5s;
-	width: 100%; height: auto;
-	max-height: 500px;
+	width: 100%;
+	height: auto;
+	max-height: 400px;
 	border-radius: 20px;
 
 }
 
 .caption {
-	padding: 10px;
 	border-radius: 10px;
 	color: white;
 	position: relative;
-  	bottom: 20px;
+  	bottom: 30px;
 	display: inline;
 	visibility: hidden;
 }
@@ -90,7 +88,7 @@ figure img:hover {
 	    opacity: 1;
 	    -webkit-transform: scale(1.03);
 	    -ms-transform: scale(1.03);
-	    transform: scale(1.03);
+	    transform: scale(1.25);
 }
 figure:hover p{
 	visibility: visible;
@@ -107,7 +105,7 @@ figure:hover p{
 	top: 0;
 	width: 100%;
 	height: 100%;
-	background-color: white;
+	background: url(//subtlepatterns.com/patterns/scribble_light.png);
 	display: flex;
 	flex-direction: row;
 	padding: 10px;
@@ -115,32 +113,57 @@ figure:hover p{
 
 }
 .img-container {
-	background-color: grey;
+	padding: 20px;
 	width: 50%;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	align-content: center;
 }
+.img-container img {
+	width: auto;
+	height: auto;
+	min-width: 70%;
+	max-width: 100%;
+	max-height: 580px;
+	border-radius: 20px;
+}
 
 .comments-container {
-	background: red;
-	width:40%;
+	border-left: solid grey 2px;
+	padding: 20px;
+	height: 100%;
+	width: 50%;
 	display: flex;
 	flex-direction: column;
 }
-.popup img {
+.comments-container h2{
+	border-bottom: solid grey 2px;
+}
+.comments-container img {
+	border-radius: 50%
+}
+.comments-container form {
+	display: flex;
+	flex-direction: column;
+	float: right;
+	position: absolute;
+	bottom: 30px;
 	width: 100%;
-	height: auto;
-	max-height: 500px;
-	border-radius: 20px;
+}
+.comment img {
+	display: inline;
+}
+.comment p {
+	display: inline;
 }
 
 
 .x {
 	position: absolute;
-	top: 0;
-	right: 0;
+	top: 15px;
+	right: 15px;
 
 }
 .back-btn {

@@ -29,7 +29,7 @@ module.exports.insertCommentIndb = function (
 
 ////////////////////////////get functions////////////////////////////
 
-module.exports.getImages = function getImages() {
+module.exports.getImages = function() {
     return db.query(
         `SELECT *, (
        SELECT id FROM images
@@ -39,7 +39,7 @@ module.exports.getImages = function getImages() {
     );
 };
 
-exports.getMoreImages = function getMoreImages(id) {
+exports.getMoreImages = function(id) {
     return db.query(
         `SELECT *, (
        SELECT id FROM images
@@ -52,8 +52,21 @@ exports.getMoreImages = function getMoreImages(id) {
         [id]
     );
 };
+exports.getlastImage = function(id) {
+    return db.query(
+        `SELECT *, (
+       SELECT id FROM images
+       ORDER BY id ASC
+       LIMIT 1)
+       AS lowest_id FROM images
+       WHERE id < $1
+       ORDER BY id DESC
+       LIMIT 1;`,
+        [id]
+    );
+};
 
-exports.lowestId = function lowestId(id) {
+exports.lowestId = function(id) {
     return db.query(
         `SELECT id FROM images
         BY id ASC
@@ -64,7 +77,8 @@ exports.lowestId = function lowestId(id) {
 };
 
 module.exports.getComments = function(postId) {
-	return db.query(`SELECT * FROM comments WHERE postId = $1`, [postId]);
+	return db.query(`SELECT * FROM comments WHERE postId = $1 ORDER BY id asc
+	LIMIT 1;`, [postId]);
 };
 module.exports.getImgInfo = function(id) {
 	return db.query(`SELECT * FROM images WHERE id = $1`, [id]);

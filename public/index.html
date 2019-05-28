@@ -44,11 +44,12 @@
 
 	<script id='popup-template' type="text/x-template">
 
-		<div v-if='clickedImg' class="popup"
-							>
+		<div v-if='clickedImg' class="popup">
 							<button class='x' @click='closepopup'>X</button>
 							<button class='back-btn' @click='backbtn'>></button>
 							<button class='next-btn' @click='nextbtn'><</button>
+
+							<!--image------------------------------------------------------------>
 
 							<div class="img-container">
 							<img
@@ -65,24 +66,29 @@
                             DELETE
 							</button>
 						</div>
+						<!--COMMENTs------------------------------------------------------------>
+
 						<div class="comments-container">
-
-							<h3>add a comment</h3>
-							<form>
-				                <input v-model='form.comment' type="text" name="comment" placeholder="enter your comment" required>
-				                <input v-model='form.username' type="text" name="username" placeholder="user name" required>
-				                <button @click.prevent.default='submitComment'>Submit</button>
-							</form>
-							<h3>comments for image id {{clickedImg}}</h3>
+							<h2>Comments</h2>
 
 
-							<div v-for='comment in comments' v-if='comments.length>0'>
+
+							<div class="comment" v-for='comment in comments' v-if='comments.length>0'>
+								<img src="/img/squirrel.jpg" alt="fsdnfsdf" width="100px">
 							<p>
-							{{comment.comment}}, comment by: {{comment.username}}, {{comment.created_at}}
+							Mr.Squirrel: {{comment.comment}} <br>
+							{{comment.created_at}}
 
 							</p>
+						</div>
+
+							<form>
+								<input v-model='form.username' type="text" name="username" placeholder="name" required>
+				                <input v-model='form.comment' type="text" name="comment" placeholder="Add a comment" required>
+				                <button @click.prevent.default='submitComment'>post</button>
+							</form>
 							</div>
-							</div>
+						</div>
 
 			</script>
 

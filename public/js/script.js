@@ -94,6 +94,7 @@
 						})
 
 				}
+				vm.$forceUpdate();
 
 
 			},
@@ -142,7 +143,7 @@
 				var self = this;
 				// console.log('upload file');
 				var formData = new FormData();
-				formData.append('username', this.form.username);
+				formData.append('username', 'this.form.username');
 				formData.append('comment', this.form.comment)
 
 				this.form.imageId = this.clickedImg;
