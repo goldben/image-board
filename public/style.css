@@ -3,14 +3,56 @@
 }
 
 body {
+	background: url(//subtlepatterns.com/patterns/scribble_light.png);
+  font-family: Calluna, Arial, sans-serif;
+  min-height: 1000px;
 }
-
 header {
 	display: flex;
 	flex-direction: column;
-	text-align: center;
-	background: grey;
 	padding: 0 30px 30px;
+}
+
+#wrapper {
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	flex-flow: row wrap;
+	flex-direction: row-reverse;
+}
+figure {
+	width: 25%;
+	border-radius: 10px;
+	background: black;
+	margin: 0 4px 15px;
+	transition: opacity .4s ease-in-out;
+  display: inline-block;
+  column-break-inside: avoid;
+}
+
+figure img {
+	width: 100%; height: auto;
+	border-radius: 5px;
+}
+
+.caption {
+	color: white;
+  	text-align: center;
+	position: relative;
+  	bottom: 50px;
+	visibility: hidden;
+}
+
+
+
+figure:hover {
+	opacity: 0.8;
+
+}
+
+@media screen and (max-width: 750px) {
+  #columns { column-gap: 0px; }
+  #columns figure { width: 100%; }
 }
 
 .popup {
@@ -26,7 +68,6 @@ header {
 
 .popup img {
 	width: 300px;
-	height: 300px;
 }
 
 .x {
@@ -41,38 +82,12 @@ form {
 	justify-content: space-around;
 }
 
-.wrapper {
-	display: flex;
-	align-items: flex-start;
-	justify-content: space-around;
-	flex-flow: row wrap;
-	flex-direction: row-reverse;
-}
 
-.card {
-	margin: 10px;
-	width: 300px;
-	height: 300px;
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	flex-direction: column;
-	overflow: hidden;
-	position: relative;
-}
 
-.card-img {
-	position: relative;
-	width: 280px;
-	height: 280px;
-	border-radius: 20px;
-}
 
-.title {
-
-}
-
-p {
-	text-align: center;
-	margin: 10px;
+#load-more-btn {
+	display: block;
+	position: fixed;
+	bottom: 0;
+	left: 650px;
 }

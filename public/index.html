@@ -21,17 +21,17 @@
 			</form>
 		</header>
 
-		<div class="wrapper">
-			<div class="card" v-for='image in images' v-if='images.length>0'>
+		<div id="wrapper">
+			<figure v-for='image in images' v-if='images.length>0'>
 				<a :href="'#' + image.id">
-					<img class="card-img" :src=image.url />
+					<img :src=image.url />
 				</a>
-				<span class="title">
-					<p>{{image.title}}</p>
-				</span>
-			</div>
-			<button v-if="getMoreButton" @click="getMoreImages" id="more-button" type="button" name="button">LOAD MORE</button>
+				<p class = "caption">
+					{{image.title}}
+				</p>
+			</figure>
 		</div>
+		<button v-if="getMoreButton" @click="getMoreImages" id="load-more-btn" type="button" name="button">LOAD MORE</button>
 
 
 		<popup :clicked-img="clickedImg" v-if='clickedImg' @close-it="onclosepopup" >
