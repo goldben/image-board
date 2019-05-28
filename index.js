@@ -35,7 +35,28 @@ app.use(bodyParser.json());
 app.use(express.static(`./public`));
 
 ////////////////////////////////////////// POST ////////////////////////////////////
+app.post("/upload-from-url", function(req, res) {
+	console.log("upload from url", req.body);
+	let url = req.body.url;
+	console.log(url);
+	let username = req.body.username;
+	let title = req.body.title;
+	let description = req.body.description;
 
+	if (url) {
+		db.insertImgInDb(url, username, title, description).then((results) => {
+				console.log(results);
+				res.json(results.rows[0]);
+			})
+			.catch(e => {
+				console.log('ERROR AT UPLOAD URL', e);
+			});
+	} else {
+		res.json({
+			success: false
+		});
+	}
+})
 
 app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
 	console.log(req.body);
@@ -43,11 +64,11 @@ app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
 	// req.file will refer to the image that was just uploaded
 	console.log('req.file: ', req.file);
 	// So what we want to store in the images table is the amazonaws URL + the filename.
-	const url = `${amazonUrl}${req.file.filename}`;
+	let url = `${amazonUrl}${req.file.filename}`;
 	console.log(url);
-	const username = req.body.username;
-	const title = req.body.title;
-	const description = req.body.description;
+	let username = req.body.username;
+	let title = req.body.title;
+	let description = req.body.description;
 
 	if (req.file) {
 		db.insertImgInDb(url, username, title, description).then((results) => {
@@ -88,6 +109,20 @@ app.post(`/addcomment`, (req, res) => {
 	}).catch(e => {
 		console.log('ERROR AT ADD COMMENT', e);
 	});
+});
+
+app.post("/delete/:id", (req, res) => {
+    console.log("/delete request params", req.params.id);
+    db.deleteComments(req.params.id)
+        .then(() => {
+            console.log(`image ${req.params.id} comments are deleted`);
+            db.deleteImage(req.params.id).then(() => {
+                console.log(`image ${req.params.id} is deleted`);
+            });
+        })
+        .catch(err => {
+            console.log("error in delete", err);
+        });
 });
 
 ////////////////////////////////////// GET /////////////////////////////////////////////

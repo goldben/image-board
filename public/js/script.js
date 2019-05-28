@@ -37,6 +37,20 @@
 		}, //close mounted
 
 		methods: {
+			deleteImg: function() {
+                var self = this;
+				var e =this.clickedImg;
+                console.log("deleteImg fires", e);
+                axios.post("delete/" + e).then(function() {
+                    console.log("image ", e, " deleted");
+                    for (var i = self.images.length - 1; i > 0; i--) {
+                        if (self.images[i].id === e) {
+                            self.images.splice(i, 1);
+                        }
+                    }
+                });
+				location.hash = '';
+},
 			getMoreImages: function() {
 				console.log("trying to load more");
                 var self = this;
@@ -61,14 +75,27 @@
 			uploadFile: function() {
 				// console.log('upload file');
 				var formData = new FormData();
-				formData.append('file', this.form.file);
+				formData.append('title', this.form.title);
 				formData.append('username', this.form.username);
 				formData.append('description', this.form.description)
 				// if you console.log formData and get an{} thats ok
-				axios.post('/upload', formData)
-					.then(function(resp) {
-						console.log('resp in POST /upload', resp);
-					})
+				if(this.form.file) {
+					formData.append('file', this.form.file);
+					axios.post('/upload', formData)
+						.then(function(resp) {
+							console.log('resp in POST /upload', resp);
+						})
+				} else if(this.form.url) {
+					console.log(this.form.url);
+					formData.append('url', this.form.url);
+					axios.post('/upload-from-url', formData)
+						.then(function(resp) {
+							console.log('resp in POST /upload-url', resp);
+						})
+
+				}
+
+
 			},
 			onclosepopup: function() {
 				console.log("close!")
@@ -84,6 +111,7 @@
 		props: [
 			'clickedImg',
 			'onClosePopup',
+			'deleteImg'
 		],
 		data: function() {
 			return {
@@ -131,8 +159,17 @@
 			closepopup: function() {
 				console.log('close it');
 				this.$emit("close-it");
-			}
-		},
+			},
+			backbtn: function() {
+				console.log('back btn clicked', location.hash.slice(1)-1);
+				location.hash = Number(location.hash.slice(1))-1
+
+			},
+			nextbtn: function() {
+				console.log('next btn clicked', Number(location.hash.slice(1))+1 );
+				location.hash = Number(location.hash.slice(1))+1
+			},
+		},//close methods
 		watch: {
 			clickedImg: function() {
 				var self = this;

@@ -69,3 +69,21 @@ module.exports.getComments = function(postId) {
 module.exports.getImgInfo = function(id) {
 	return db.query(`SELECT * FROM images WHERE id = $1`, [id]);
 };
+
+//////////////////DELETE///////////////////////////////////
+module.exports.deleteImage = function deleteImage(id) {
+    return db.query(
+        `
+        DELETE FROM images WHERE id = $1;
+        `,
+        [id]
+    );
+};
+module.exports.deleteComments = function deleteComments(id) {
+    return db.query(
+        `
+        DELETE FROM comments WHERE postId = $1;
+        `,
+        [id]
+    );
+};

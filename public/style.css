@@ -7,11 +7,30 @@ body {
   font-family: Calluna, Arial, sans-serif;
   min-height: 1000px;
 }
+/*--------------------header-------------------------- */
 header {
 	display: flex;
 	flex-direction: column;
 	padding: 0 30px 30px;
 }
+#choose-file {
+	height: 100px;
+}
+form {
+	display: flex;
+	justify-content: space-around;
+}
+
+input, select, textarea{
+  width: 20%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+/*-----------------------wrapper--------------------------- */
 
 #wrapper {
 	display: flex;
@@ -20,55 +39,103 @@ header {
 	flex-flow: row wrap;
 	flex-direction: row-reverse;
 }
+
+#load-more-btn {
+	display: block;
+	position: fixed;
+	bottom: 0;
+	left: 650px;
+}
+
+/*-----------------------figure--------------------------- */
+
 figure {
 	width: 25%;
-	border-radius: 10px;
-	background: black;
+	border-radius: 20px;
 	margin: 0 4px 15px;
-	transition: opacity .4s ease-in-out;
   display: inline-block;
-  column-break-inside: avoid;
+  text-align: center;
+  overflow: hidden;
+background-color: #000;
 }
 
 figure img {
+	width: 100%;
+	height: auto;
+	opacity: 0.7;
+	-webkit-transform: scale(1.15);
+    -ms-transform: scale(1.15);
+    transform: scale(1.15);
+    -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
+    transition: transform 0.5s, opacity 0.5s;
 	width: 100%; height: auto;
-	border-radius: 5px;
+	max-height: 500px;
+	border-radius: 20px;
+
 }
 
 .caption {
+	padding: 10px;
+	border-radius: 10px;
 	color: white;
-  	text-align: center;
 	position: relative;
-  	bottom: 50px;
+  	bottom: 20px;
+	display: inline;
 	visibility: hidden;
 }
 
 
 
-figure:hover {
-	opacity: 0.8;
-
+figure img:hover {
+	    opacity: 1;
+	    -webkit-transform: scale(1.03);
+	    -ms-transform: scale(1.03);
+	    transform: scale(1.03);
+}
+figure:hover p{
+	visibility: visible;
 }
 
 @media screen and (max-width: 750px) {
   #columns { column-gap: 0px; }
   #columns figure { width: 100%; }
 }
+/*--------------------popup-------------------------- */
 
 .popup {
 	position: fixed;
-	top: 20%;
-	left: 20%;
+	top: 0;
+	width: 100%;
+	height: 100%;
 	background-color: white;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	padding: 10px;
 	align-items: center;
+
+}
+.img-container {
+	background-color: grey;
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	align-content: center;
 }
 
-.popup img {
-	width: 300px;
+.comments-container {
+	background: red;
+	width:40%;
+	display: flex;
+	flex-direction: column;
 }
+.popup img {
+	width: 100%;
+	height: auto;
+	max-height: 500px;
+	border-radius: 20px;
+}
+
 
 .x {
 	position: absolute;
@@ -76,18 +143,14 @@ figure:hover {
 	right: 0;
 
 }
-
-form {
-	display: flex;
-	justify-content: space-around;
+.back-btn {
+	position: absolute;
+	top: 45%;
+	right: 0;
 }
 
-
-
-
-#load-more-btn {
-	display: block;
-	position: fixed;
-	bottom: 0;
-	left: 650px;
+.next-btn {
+	position: absolute;
+	top: 45%;
+	left: 0;
 }
