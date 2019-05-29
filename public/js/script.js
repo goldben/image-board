@@ -67,12 +67,25 @@
                     }
                 });
             },
+			getImages: function()  {
+				var self = this;
+				axios.get('/images').then(function(resp) {
+					self.images = resp.data;
+					if (
+	                    self.images[self.images.length - 1].id !=
+	                    self.images[self.images.length - 1].lowest_id
+	                ) {
+	                    self.getMoreButton = true;
+	                }
+				});
+			},
 			handleFileChange: function(e) {
 
 				this.form.file = e.target.files[0];
 			},
 
 			uploadFile: function() {
+				var self = this;
 				// console.log('upload file');
 				var formData = new FormData();
 				formData.append('title', this.form.title);
@@ -84,17 +97,23 @@
 					axios.post('/upload', formData)
 						.then(function(resp) {
 							console.log('resp in POST /upload', resp);
+							self.getImages()
+
 						})
 				} else if(this.form.url) {
-					console.log(this.form.url);
-					formData.append('url', this.form.url);
-					axios.post('/upload-from-url', formData)
+					console.log("made it", this.form.url);
+					var formUrl = {
+						title: this.form.title,
+						description: this.form.description,
+						username: this.form.username,
+						url: this.form.url
+					}
+					axios.post('/upload-from-url', formUrl)
 						.then(function(resp) {
 							console.log('resp in POST /upload-url', resp);
+							self.getImages();
 						})
-
-				}
-				vm.$forceUpdate();
+				};
 
 
 			},

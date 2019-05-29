@@ -147,11 +147,18 @@ figure:hover p{
 .comments-container form {
 	display: flex;
 	flex-direction: column;
-	float: right;
 	position: absolute;
 	bottom: 30px;
 	width: 100%;
 }
+.comments-container input {
+	width: 47%;
+}
+.comments-container button {
+	float: right;
+	width: 47%;
+}
+
 .comment img {
 	display: inline;
 }
