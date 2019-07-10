@@ -30,9 +30,9 @@
 				<a :href="'#' + image.id">
 					<img :src=image.url />
 				</a>
-				<p class = "caption">
+				<h2 class = "caption">
 					{{image.title}}
-				</p>
+				</h2>
 			</figure>
 		</div>
 		<button v-if="getMoreButton" @click="getMoreImages" id="load-more-btn" type="button" name="button">LOAD MORE</button>

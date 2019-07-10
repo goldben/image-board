@@ -78,7 +78,7 @@ exports.lowestId = function(id) {
 
 module.exports.getComments = function(postId) {
 	return db.query(`SELECT * FROM comments WHERE postId = $1 ORDER BY id asc
-	LIMIT 1;`, [postId]);
+	LIMIT 5;`, [postId]);
 };
 module.exports.getImgInfo = function(id) {
 	return db.query(`SELECT * FROM images WHERE id = $1`, [id]);
