@@ -2,49 +2,46 @@
 <html>
 
 <head>
-	<title>IMAGE BOARD</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<link rel="stylesheet" href="/style.css">
+    <title>IMAGE BOARD</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css">
 </head>
 
 <body>
-	<div id="main">
-		<!--MAIN -------------------------------------------------------------------------------------------->
-		<header>
-			<h1>IMAGE BOARD</h1>
-			<form>
-				<input v-model='form.title' type="text" name="title" placeholder="title">
-				<input v-model='form.description' type="text" name="description" placeholder="image description">
-				<input v-model='form.username' type="text" name="username" placeholder="username">
-				<input type="file" name="file" accept="image/*" @change='handleFileChange'>
-				<input v-model='form.url' type="url" name="url" id="url"
-       placeholder="https://example.com"
-       pattern="https://.*" size="30"
-       >
-				<button @click.prevent.default='uploadFile'>upload</button>
-			</form>
-		</header>
+    <div id="main">
+        <!--MAIN -------------------------------------------------------------------------------------------->
+        <header>
+            <h1>IMAGE BOARD</h1>
+            <form>
+                <input v-model='form.title' type="text" name="title" placeholder="title">
+                <input v-model='form.description' type="text" name="description" placeholder="image description">
+                <input v-model='form.username' type="text" name="username" placeholder="username">
+                <!-- <input type="file" name="file" accept="image/*" @change='handleFileChange'> -->
+                <input v-model='form.url' type="url" name="url" id="url" placeholder="https://example.com" pattern="https://.*" size="30">
+                <button @click.prevent.default='uploadFile'>upload</button>
+            </form>
+        </header>
 
-		<div id="wrapper">
-			<figure v-for='image in images' v-if='images.length>0'>
-				<a :href="'#' + image.id">
-					<img :src=image.url />
-				</a>
-				<h2 class = "caption">
-					{{image.title}}
-				</h2>
-			</figure>
-		</div>
-		<button v-if="getMoreButton" @click="getMoreImages" id="load-more-btn" type="button" name="button">LOAD MORE</button>
+        <div id="wrapper">
+            <figure v-for='image in images' v-if='images.length>0'>
+                <a :href="'#' + image.id">
+                    <img :src=image.url />
+                </a>
+                <h4 class="caption">
+                    {{image.username}}
+                </h4>
+            </figure>
+        </div>
+        <button v-if="getMoreButton" @click="getMoreImages" id="load-more-btn" type="button" name="button">LOAD MORE</button>
 
 
-		<popup :clicked-img="clickedImg" :delete-img="deleteImg" v-if='clickedImg' @close-it="onclosepopup" >
-	</div>
-	<!--- -POPUP COMPONENT--------------------------------------------------------------->
+        <popup :clicked-img="clickedImg" :delete-img="deleteImg" v-if='clickedImg' @close-it="onclosepopup">
+    </div>
+    <!--- -POPUP COMPONENT--------------------------------------------------------------->
 
-	<script id='popup-template' type="text/x-template">
+    <script id='popup-template' type="text/x-template">
 
-		<div v-if='clickedImg' class="popup">
+        <div v-if='clickedImg' class="popup">
 							<button class='x' @click='closepopup'>X</button>
 							<button class='back-btn' @click='backbtn'>></button>
 							<button class='next-btn' @click='nextbtn'><</button>
@@ -93,9 +90,9 @@
 			</script>
 
 
-	<script src="/js/vue.js"></script>
-	<script src="/js/axios.min.js"></script>
-	<script src="/js/script.js"></script>
+    <script src="/js/vue.js"></script>
+    <script src="/js/axios.min.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 
 </html>
