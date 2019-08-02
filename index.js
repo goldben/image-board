@@ -6,8 +6,8 @@ const path = require(`path`);
 const db = require(`./utils/db`);
 const bodyParser = require(`body-parser`);
 
-// const s3 = require('./s3');
-const amazonUrl = require(`./config`).s3Url;
+// const s3 = require("./s3");
+// const amazonUrl = require(`./config`).s3Url;
 
 app.use(express.static("./public"));
 
@@ -30,8 +30,6 @@ const uploader = multer({
 });
 
 app.use(bodyParser.json());
-
-app.use(express.static(`./public`));
 
 ////////////////////////////////////////// POST ////////////////////////////////////
 app.post("/upload-from-url", function(req, res) {
@@ -57,7 +55,7 @@ app.post("/upload-from-url", function(req, res) {
     });
   }
 });
-//
+
 // app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
 //   console.log(req.body);
 //   // If nothing went wrong the file is already in the uploads directory
@@ -193,4 +191,7 @@ app.get(`/popup-data/:id`, (req, res) => {
 
 //////////////////////////////////////////////////////////////////////////////
 
-app.listen(8080, () => console.log("I VUE JS"));
+if (require.main == module) {
+  //HEROKU:
+  app.listen(process.env.PORT || 8080, () => console.log("Im listening"));
+}
