@@ -1,203 +1,204 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    background: url(//subtlepatterns.com/patterns/scribble_light.png);
-    font-family: Calluna, Arial, sans-serif;
-    min-height: 1000px;
+  background: url(//subtlepatterns.com/patterns/scribble_light.png);
+  font-family: Calluna, Arial, sans-serif;
+  min-height: 1000px;
 }
 
 /*--------------------header-------------------------- */
 header {
-    display: flex;
-    flex-direction: column;
-    padding: 0 30px 30px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 30px 30px;
 }
 
 #choose-file {
-    height: 100px;
+  height: 100px;
 }
 
 header form {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
 }
 
 input,
 select,
 textarea {
-    width: 20%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    resize: vertical;
+  width: 20%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
 }
 
 /*-----------------------wrapper--------------------------- */
 
 #wrapper {
-    -webkit-column-width: 300px;
-    -moz-column-width: 300px;
-    o-column-width: 300px;
-    -ms-column-width: 300px;
-    column-width: 300px;
-    padding: 3vh;
+  -webkit-column-width: 300px;
+  -moz-column-width: 300px;
+  o-column-width: 300px;
+  -ms-column-width: 300px;
+  column-width: 300px;
+  padding: 3vh;
 }
 
 #load-more-btn {
-    display: block;
-    position: fixed;
-    bottom: 0;
-    left: 46vw;
-    width: 8vw;
+  display: block;
+  position: fixed;
+  bottom: 0;
+  left: 46vw;
+  width: 8vw;
 }
 
 /*-----------------------figure--------------------------- */
 
 figure {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 20px;
-    display: inline-block;
-    text-align: center;
-    overflow: hidden;
-    background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  display: inline-block;
+  text-align: center;
+  overflow: hidden;
+  background-color: #000;
 }
 
 figure img {
-    opacity: 0.7;
-    -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
-    transition: transform 0.5s, opacity 0.5s;
-    width: 100%;
-    height: auto;
-    border-radius: 20px;
+  opacity: 0.7;
+  -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
+  transition: transform 0.5s, opacity 0.5s;
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
 }
 
 .caption {
-    border-radius: 10px;
-    color: white;
-    position: relative;
-    bottom: 30px;
-    display: inline;
-    visibility: hidden;
+  border-radius: 10px;
+  color: white;
+  position: relative;
+  bottom: 30px;
+  display: inline;
+  visibility: hidden;
 }
 
 figure img:hover {
-    opacity: 1;
+  opacity: 1;
 }
 
 figure:hover .caption {
-    visibility: visible;
+  visibility: visible;
 }
 
 @media screen and (max-width: 750px) {
-    #columns {
-        column-gap: 0px;
-    }
+  #columns {
+    column-gap: 0px;
+  }
 
-    #columns figure {
-        width: 100%;
-    }
+  #columns figure {
+    width: 100%;
+  }
 }
 
 /*--------------------popup-------------------------- */
 
 .popup {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: url(//subtlepatterns.com/patterns/scribble_light.png);
-    display: flex;
-    flex-direction: row;
-    padding: 10px;
-    align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: url(//subtlepatterns.com/patterns/scribble_light.png);
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  align-items: center;
 }
 
 .img-container {
-    padding: 20px;
-    width: 50%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
+  padding: 20px;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
 }
 
 .img-container img {
-    width: auto;
-    height: auto;
-    min-width: 70%;
-    max-width: 100%;
-    max-height: 580px;
-    border-radius: 20px;
+  width: auto;
+  height: auto;
+  min-width: 70%;
+  max-width: 100%;
+  max-height: 580px;
+  border-radius: 20px;
 }
 
-.caption {}
+.caption {
+}
 
 .comments-container {
-    border-left: solid grey 2px;
-    padding: 20px;
-    height: 100%;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
+  border-left: solid grey 2px;
+  padding: 20px;
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
 }
 
 .comments-container h2 {
-    border-bottom: solid grey 2px;
+  border-bottom: solid grey 2px;
 }
 
 .comments-container img {
-    border-radius: 50%;
+  border-radius: 50%;
 }
 
 .comments-container form {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    bottom: 30px;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
 }
 
 .comments-container input {
-    width: 47%;
+  width: 47%;
 }
 
 .comments-container button {
-    float: right;
-    width: 47%;
+  float: right;
+  width: 47%;
 }
 
 .comment img {
-    display: inline;
+  display: inline;
 }
 
 .comment p {
-    display: inline;
+  display: inline;
 }
 
 .popup button {
-    border-radius: 4px;
+  border-radius: 4px;
 }
 
 .x {
-    position: absolute;
-    top: 15px;
-    right: 15px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
 }
 
 .back-btn {
-    position: absolute;
-    top: 45%;
-    right: 0;
+  position: absolute;
+  top: 45%;
+  right: 0;
 }
 
 .next-btn {
-    position: absolute;
-    top: 45%;
-    left: 0;
+  position: absolute;
+  top: 45%;
+  left: 0;
 }
