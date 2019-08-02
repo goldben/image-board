@@ -14,7 +14,10 @@ header {
   flex-direction: column;
   padding: 0 30px 30px;
 }
-
+header h1 {
+  text-align: center;
+  margin: 10px;
+}
 #choose-file {
   height: 100px;
 }
@@ -38,12 +41,12 @@ textarea {
 /*-----------------------wrapper--------------------------- */
 
 #wrapper {
+  padding: 150px;
   -webkit-column-width: 300px;
   -moz-column-width: 300px;
   o-column-width: 300px;
   -ms-column-width: 300px;
   column-width: 300px;
-  padding: 3vh;
 }
 
 #load-more-btn {
@@ -60,11 +63,14 @@ figure {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 20px;
   display: inline-block;
   text-align: center;
-  overflow: hidden;
+}
+.box {
   background-color: #000;
+  overflow: hidden;
+  width: 100%;
+  border-radius: 20px;
 }
 
 figure img {
@@ -154,6 +160,10 @@ figure:hover .caption {
 
 .comments-container img {
   border-radius: 50%;
+  width: 50px;
+}
+.date {
+  text-align: center;
 }
 
 .comments-container form {

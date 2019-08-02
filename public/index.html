@@ -25,7 +25,9 @@
         <div id="wrapper">
             <figure v-for='image in images' v-if='images.length>0'>
                 <a :href="'#' + image.id">
-                    <img :src=image.url />
+					<div class="box">
+                    	<img :src=image.url />
+					</div>
                 </a>
                 <h4 class="caption">
                     {{image.username}}
@@ -71,10 +73,11 @@
 
 
 							<div class="comment" v-for='comment in comments' v-if='comments.length>0'>
+								<div class="date"> {{new Date(comment.created_at).toDateString()}}</div>
+
 								<img src="/img/squirrel.jpg" alt="fsdnfsdf" width="100px">
 							<p>
-							Mr.Squirrel: {{comment.comment}} <br>
-							{{comment.created_at}}
+							{{comment.username}}: {{comment.comment}} <br>
 
 							</p>
 						</div>
