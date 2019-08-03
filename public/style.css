@@ -31,6 +31,7 @@ input,
 select,
 textarea {
   width: 20%;
+  height: 20px;
   padding: 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -41,7 +42,7 @@ textarea {
 /*-----------------------wrapper--------------------------- */
 
 #wrapper {
-  padding: 150px;
+  padding: 30px 150px;
   -webkit-column-width: 300px;
   -moz-column-width: 300px;
   o-column-width: 300px;

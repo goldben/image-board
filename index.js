@@ -132,8 +132,7 @@ app.get("/images", (req, res) => {
   db.getImages()
     .then(results => {
       res.json(results.rows);
-      //console.log('GET /images hit!!!', results.rows[0].url);
-      //once front recieves JSON
+      console.log("GET /images: ", results.rows);
     })
     .catch(e => {
       console.log("ERROR AT GET IMAGES", e);
