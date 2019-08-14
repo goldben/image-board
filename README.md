@@ -3,6 +3,9 @@
 This project is an image board with a comment section.
 The main goal of this project was to learn how to work with Vue.Js 
 
+### Deployed version can be foun here:
+https://morning-coast-62117.herokuapp.com
+
 ## technologies/packages used:
  Vue.Js, Postgressql, Node.js, Express, AWS
 
@@ -16,5 +19,4 @@ Start the node backend server
 
 ## Screenshots of the project
 
-Deployed version can be foun here:
-https://morning-coast-62117.herokuapp.com
+
